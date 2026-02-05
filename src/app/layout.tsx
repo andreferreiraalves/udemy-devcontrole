@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/header";
-import { SessionProvider } from "next-auth/react";
+import { AuthProvider } from "@/lib/auth_provider";
 
 export const metadata: Metadata = {
   title: "Dev Controle - Sistema de gerênciamento",
@@ -16,10 +16,10 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body>
-        <SessionProvider>
+        <AuthProvider>
           <Header />
           {children}
-        </SessionProvider>
+        </AuthProvider>
       </body>
     </html>
   );

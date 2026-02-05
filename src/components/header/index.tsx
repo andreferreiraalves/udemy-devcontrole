@@ -14,7 +14,6 @@ export function Header() {
   async function handleLogOut() {
     await signOut();
   }
-
   return (
     <header className="w-full flex items-center px-2 py-4 bg-white h-20 shadow-sm">
       <div className="w-full flex items-center justify-between max-w-7xl mx-auto">
