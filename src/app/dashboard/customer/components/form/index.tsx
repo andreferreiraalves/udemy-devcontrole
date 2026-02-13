@@ -27,8 +27,15 @@ export function NewCustomerForm() {
     resolver: zodResolver(schema),
   });
 
+  function handlerRegisterCustomer(data: FormData) {
+    console.log(data);
+  }
+
   return (
-    <form className="flex flex-col mt-6">
+    <form
+      className="flex flex-col mt-6"
+      onSubmit={handleSubmit(handlerRegisterCustomer)}
+    >
       <label className="mb-1 text-lg font-medium">Nome completo</label>
       <Input
         type="text"
@@ -37,6 +44,36 @@ export function NewCustomerForm() {
         error={errors.name?.message}
         register={register}
       />
+      <section className="flex gap-2 my-2 flex-col sm:flex-row">
+        <div className="flex-1">
+          <label className="mb-1 text-lg font-medium">Telefone</label>
+          <Input
+            type="number"
+            name="phone"
+            placeholder="Exemplo (DD) 999999999"
+            error={errors.phone?.message}
+            register={register}
+          />
+        </div>
+
+        <div className="flex-1">
+          <label className="mb-1 text-lg font-medium">Telefone</label>
+          <Input
+            type="mail"
+            name="email"
+            placeholder="Digite o e-mail..."
+            error={errors.email?.message}
+            register={register}
+          />
+        </div>
+      </section>
+
+      <button
+        type="submit"
+        className="bg-blue-500 my-4 px-2 h-11 rounded text-white font-bold"
+      >
+        Cadastrar
+      </button>
     </form>
   );
 }

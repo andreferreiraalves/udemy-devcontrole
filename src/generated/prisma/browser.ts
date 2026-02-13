@@ -42,3 +42,13 @@ export type VerificationToken = Prisma.VerificationTokenModel
  * 
  */
 export type Authenticator = Prisma.AuthenticatorModel
+/**
+ * Model Customer
+ * 
+ */
+export type Customer = Prisma.CustomerModel
+/**
+ * Model Ticket
+ * 
+ */
+export type Ticket = Prisma.TicketModel

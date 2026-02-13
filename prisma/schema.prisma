@@ -18,8 +18,10 @@ model User {
   // Optional for WebAuthn support
   Authenticator Authenticator[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  tickets   Ticket[]
+  customers Customer[]
 }
 
 model Account {
@@ -75,4 +77,31 @@ model Authenticator {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([userId, credentialID])
+}
+
+model Customer {
+  id        Int      @id() @default(autoincrement())
+  name      String
+  phone     String
+  email     String
+  create_at DateTime @default(now())
+  update_at DateTime @default(now())
+  tickets   Ticket[]
+  userId    String
+  users     User     @relation(fields: [userId], references: [id])
+}
+
+model Ticket {
+  id          Int      @id() @default(autoincrement())
+  name        String
+  description String
+  status      String
+  create_at   DateTime @default(now())
+  update_at   DateTime @default(now())
+
+  customerId Int
+  customer   Customer @relation(fields: [customerId], references: [id])
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 }
