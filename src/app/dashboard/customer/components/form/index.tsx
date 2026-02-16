@@ -1,8 +1,10 @@
 "use client";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { email, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/input";
+import { api } from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 const schema = z.object({
   name: z.string().min(1, "O campo é obrigátorio"),
@@ -19,6 +21,8 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export function NewCustomerForm() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -27,8 +31,14 @@ export function NewCustomerForm() {
     resolver: zodResolver(schema),
   });
 
-  function handlerRegisterCustomer(data: FormData) {
-    console.log(data);
+  async function handlerRegisterCustomer(data: FormData) {
+    const response = await api.post("/api/customer", {
+      name: data.name,
+      phone: data.phone,
+      email: data.email,
+    });
+
+    router.replace("/dashboard/customer");
   }
 
   return (
@@ -57,7 +67,7 @@ export function NewCustomerForm() {
         </div>
 
         <div className="flex-1">
-          <label className="mb-1 text-lg font-medium">Telefone</label>
+          <label className="mb-1 text-lg font-medium">E-mail</label>
           <Input
             type="mail"
             name="email"
