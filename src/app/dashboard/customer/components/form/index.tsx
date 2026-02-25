@@ -38,6 +38,7 @@ export function NewCustomerForm() {
       email: data.email,
     });
 
+    router.refresh();
     router.replace("/dashboard/customer");
   }
 

@@ -43,3 +43,11 @@ Rapid Development/Prototyping: Use npx prisma db push to sync your schema with t
 www.prisma.io
 www.prisma.io
 +4
+
+Create an initial migration using the prisma migrate command:
+npx prisma migrate dev --name init
+
+You can run prisma migrate again to update your migrations
+npx prisma migrate dev --name added_job_title
+
+npx prisma migrate deploy
