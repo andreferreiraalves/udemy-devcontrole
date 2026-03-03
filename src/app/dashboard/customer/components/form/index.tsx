@@ -51,6 +51,7 @@ export function NewCustomerForm() {
       <Input
         type="text"
         name="name"
+        autoFocus={true}
         placeholder="Digite o nome completo"
         error={errors.name?.message}
         register={register}
